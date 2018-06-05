@@ -1,19 +1,15 @@
 'use strict';
 
 window.renderStatistics = function (ctx, names, times) {
-
-  //список констант
-
+  // список констант
   var HISTOGRAM_HEIGHT = 150;
   var BAR_WIDTH = 40;
   var BETWEEN_SPACE = 50;
   var INITIAL_X = 210;
   var INITIAL_Y = 250;
   var LINE_HEIGHT = 15;
-
-  //shadow
-
-  ctx.save()
+  // shadow
+  ctx.save();
   ctx.translate(125, 10);
   ctx.scale(0.9, 1);
   ctx.beginPath();
@@ -29,11 +25,9 @@ window.renderStatistics = function (ctx, names, times) {
   ctx.bezierCurveTo(558.5, 124.6, 538.0, 209.4, 537.0, 273.9);
   ctx.bezierCurveTo(441.0, 274.9, 85.4, 277.4, 22.5, 273.0);
   ctx.closePath();
-  ctx.fillStyle = "rgba(0, 0, 0, 0.7)";
+  ctx.fillStyle = 'rgba(0, 0, 0, 0.7)';
   ctx.fill();
-
-  //main window
-
+  // main window
   ctx.translate(-10, -10);
   ctx.beginPath();
   ctx.moveTo(22.5, 273.0);
@@ -48,11 +42,9 @@ window.renderStatistics = function (ctx, names, times) {
   ctx.bezierCurveTo(558.5, 124.6, 538.0, 209.4, 537.0, 273.9);
   ctx.bezierCurveTo(441.0, 274.9, 85.4, 277.4, 22.5, 273.0);
   ctx.closePath();
-  ctx.fillStyle = "rgb(255, 255, 255)";
+  ctx.fillStyle = 'rgb(255, 255, 255)';
   ctx.fill();
-
-  //star 1
-
+  // star 1
   ctx.translate(-70, 70);
   ctx.scale(1.1, 1);
   ctx.beginPath();
@@ -68,11 +60,9 @@ window.renderStatistics = function (ctx, names, times) {
   ctx.lineTo(21.5, 17.2);
   ctx.lineTo(23.3, 27.0);
   ctx.closePath();
-  ctx.fillStyle = "rgb(248, 229, 53)";
+  ctx.fillStyle = 'rgb(248, 229, 53)';
   ctx.fill();
-
-   //star 2
-
+  // star 2
   ctx.translate(40, 80);
   ctx.scale(0.5, 0.5);
   ctx.beginPath();
@@ -88,11 +78,9 @@ window.renderStatistics = function (ctx, names, times) {
   ctx.lineTo(21.5, 17.2);
   ctx.lineTo(23.3, 27.0);
   ctx.closePath();
-  ctx.fillStyle = "rgb(248, 229, 53)";
+  ctx.fillStyle = 'rgb(248, 229, 53)';
   ctx.fill();
-
-  //star 3
-
+  // star 3
   ctx.translate(1130, -180);
   ctx.beginPath();
   ctx.moveTo(23.3, 27.0);
@@ -107,22 +95,18 @@ window.renderStatistics = function (ctx, names, times) {
   ctx.lineTo(21.5, 17.2);
   ctx.lineTo(23.3, 27.0);
   ctx.closePath();
-  ctx.fillStyle = "rgb(248, 229, 53)";
+  ctx.fillStyle = 'rgb(248, 229, 53)';
   ctx.fill();
-
-// основной текст
-
+  // основной текст
   ctx.restore();
-  ctx.font = "16px PT Mono";
-  ctx.textAlign = "center";
-  ctx.fillText("Ура вы победили!", 350, 40);
-  ctx.fillText("Список результатов:", 350, 60);
-
-// сортировка массивов times и names от лучшего к худшему
-
+  ctx.font = '16px PT Mono';
+  ctx.textAlign = 'center';
+  ctx.fillText('Ура вы победили!', 350, 40);
+  ctx.fillText('Список результатов:', 350, 60);
+  // сортировка массивов times и names от лучшего к худшему
   for (var i = 0; i <= times.length - 2; i++) {
     var minTime = times[i];
-    for (var j = i+1; j <= times.length - 1; j++) {
+    for (var j = i + 1; j <= times.length - 1; j++) {
       if (times[j] < minTime) {
         minTime = times[j];
         var swapTime = times [i];
@@ -136,39 +120,32 @@ window.renderStatistics = function (ctx, names, times) {
       }
     }
   }
-
-// округляем times[i] до целого
-
-  for (var i = 0; i < times.length; i++) {
+  // округляем times[i] до целого
+  for (i = 0; i < times.length; i++) {
     times[i] = Math.round(times[i]);
   }
-
-// создаем рандомный цвет
-
+  // создаем рандомный цвет
   var getRandomColor = function () {
     return 'hsl(240, ' + (Math.floor(Math.random() * 100) + '%') + ', 50%)';
   };
-
-//рисуем гистограмму
-
+  // рисуем гистограмму
   ctx.restore();
-  for (var i = 0; i < times.length; i++) {
-    if (i === names.indexOf("Вы")) {
-      ctx.fillStyle = "rgba(255, 0, 0, 1)";
-      ctx.fillRect(INITIAL_X + BAR_WIDTH * i + BETWEEN_SPACE * i, INITIAL_Y - HISTOGRAM_HEIGHT * times[i] / times[times.length - 1] , BAR_WIDTH, HISTOGRAM_HEIGHT * times[i] / times[times.length - 1]);
-      ctx.fillStyle = "black";
-      ctx.fillText(times[i], INITIAL_X + BAR_WIDTH * i + BETWEEN_SPACE * i + BAR_WIDTH / 2, INITIAL_Y - HISTOGRAM_HEIGHT * times[i] / times[times.length-1] - LINE_HEIGHT);
+  for (i = 0; i < times.length; i++) {
+    if (i === names.indexOf('Вы')) {
+      ctx.fillStyle = 'rgba(255, 0, 0, 1)';
+      ctx.fillRect(INITIAL_X + BAR_WIDTH * i + BETWEEN_SPACE * i, INITIAL_Y - HISTOGRAM_HEIGHT * times[i] / times[times.length - 1], BAR_WIDTH, HISTOGRAM_HEIGHT * times[i] / times[times.length - 1]);
+      ctx.fillStyle = 'black';
+      ctx.fillText(times[i], INITIAL_X + BAR_WIDTH * i + BETWEEN_SPACE * i + BAR_WIDTH / 2, INITIAL_Y - HISTOGRAM_HEIGHT * times[i] / times[times.length - 1] - LINE_HEIGHT);
       ctx.fillText(names[i], INITIAL_X + BAR_WIDTH * i + BETWEEN_SPACE * i + BAR_WIDTH / 2, INITIAL_Y + LINE_HEIGHT);
     } else {
       ctx.fillStyle = getRandomColor();
-      ctx.fillRect(INITIAL_X + BAR_WIDTH * i + BETWEEN_SPACE * i, INITIAL_Y - HISTOGRAM_HEIGHT * times[i] / times[times.length - 1] , BAR_WIDTH, HISTOGRAM_HEIGHT * times[i] / times[times.length - 1]);
-      ctx.fillStyle = "black";
+      ctx.fillRect(INITIAL_X + BAR_WIDTH * i + BETWEEN_SPACE * i, INITIAL_Y - HISTOGRAM_HEIGHT * times[i] / times[times.length - 1], BAR_WIDTH, HISTOGRAM_HEIGHT * times[i] / times[times.length - 1]);
+      ctx.fillStyle = 'black';
       ctx.fillText(names[i], INITIAL_X + BAR_WIDTH * i + BETWEEN_SPACE * i + BAR_WIDTH / 2, INITIAL_Y + LINE_HEIGHT);
       ctx.fillText(times[i], INITIAL_X + BAR_WIDTH * i + BETWEEN_SPACE * i + BAR_WIDTH / 2, INITIAL_Y - HISTOGRAM_HEIGHT * times[i] / times[times.length - 1] - LINE_HEIGHT);
     }
   }
-
-//закрывающие скобки главной функции
-}
+  // закрывающие скобки главной функции
+};
 
 
