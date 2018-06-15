@@ -8,9 +8,8 @@ var EYES_COLORS = ['black', 'red', 'blue', 'yellow', 'green'];
 var WIZARD_NUMBER = 4;
 
 
-var setup = document.querySelector('.setup').classList.remove('hidden');
-
-var setupSimilar = document.querySelector('.setup-similar').classList.remove('hidden');
+document.querySelector('.setup').classList.remove('hidden');
+document.querySelector('.setup-similar').classList.remove('hidden');
 
 
 // выбор случайного элемента
@@ -31,7 +30,6 @@ var getWizard = function () {
 
 var similarListElement = document.querySelector('.setup-similar-list');
 var similarWizardTemplate = document.querySelector('#similar-wizard-template').content.querySelector('.setup-similar-item');
-console.log(similarWizardTemplate);
 
 // создание уникального мага
 
